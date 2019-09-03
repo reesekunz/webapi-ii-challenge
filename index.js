@@ -3,6 +3,7 @@ const express = require("express");
 
 // create express application
 const server = express();
+server.use(express.json());
 
 // configuring endpoints you want to listen to
 // request handler function
@@ -28,8 +29,27 @@ server.get("/hobbits", (request, response) => {
   // go to localhost:8000/hobbits and you will see the hobbits endpoint data being sent in json
 });
 
+// Other CRUD operations being tested with postman
+
+server.post("/hobbits", (request, response) => {
+  response.status(201).json({ url: "/hobbits", operation: "POST" });
+}); // post - creates data
+
+server.put("/hobbits", (request, response) => {
+  response.status(200).json({ url: "/hobbits", operation: "PUT" });
+}); // put - updates data
+
+server.delete("/hobbits", (request, response) => {
+  response.sendStatus(204);
+}); // delete - delete data
+
 // tell server to listen to connection on a particular port
 server.listen(8000, () => console.log("api running on port 8000"));
+
+//another way to do it:
+//server.listen(port, () => {
+// console.log("server listening on port ${port}");
+// });
 
 // start up with npm run server
 // or npm start if script is already there.
