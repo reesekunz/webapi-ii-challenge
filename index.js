@@ -3,7 +3,7 @@ const express = require("express");
 
 // create express application
 const server = express();
-server.use(express.json());
+server.use(express.json(), express.Router());
 
 // configuring endpoints you want to listen to
 // request handler function
@@ -31,9 +31,18 @@ server.get("/hobbits", (request, response) => {
 
 // Other CRUD operations being tested with postman
 
-server.post("/hobbits", (request, response) => {
-  response.status(201).json({ url: "/hobbits", operation: "POST" });
-}); // post - creates data
+const postRouter = require("./routes/postRoute");
+server.use("/api/posts", postRouter);
+
+// Other way to do this without adding postRoute.js
+// server.post("/hobbits", (request, response) => {
+//   response.status(201).json({ url: "/hobbits", operation: "POST" });
+// });
+
+const commentRouter = require("./routes/commentRoute");
+server.use("/api/comments", commentRouter);
+
+
 
 server.put("/hobbits", (request, response) => {
   response.status(200).json({ url: "/hobbits", operation: "PUT" });
@@ -50,6 +59,10 @@ server.listen(8000, () => console.log("api running on port 8000"));
 //server.listen(port, () => {
 // console.log("server listening on port ${port}");
 // });
+
+
+
+
 
 // start up with npm run server
 // or npm start if script is already there.
