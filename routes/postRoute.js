@@ -6,7 +6,7 @@ const db = require("../data/db");
 
 // GET
 
-router.get("/", (reqest, response) => {
+router.get("/", (request, response) => {
   //   response.json({ message: "It's working!!" });
   db.find()
     .then(post => {

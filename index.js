@@ -42,7 +42,7 @@ server.use("/api/posts", postRouter);
 const commentRouter = require("./routes/commentRoute");
 server.use("/api/comments", commentRouter);
 
-
+// the hobbit endpoints are from training kit 
 
 server.put("/hobbits", (request, response) => {
   response.status(200).json({ url: "/hobbits", operation: "PUT" });
